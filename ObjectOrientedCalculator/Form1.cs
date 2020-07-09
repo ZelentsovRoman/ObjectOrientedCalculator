@@ -180,6 +180,10 @@ namespace ObjectOrientedCalculator
                     b = a / float.Parse(textBox1.Text);
                     textBox1.Text = b.ToString();
                     break;
+                case 6:
+                    b = Math.Exp(a);
+                    textBox1.Text = b.ToString();
+                    break;
             }
 
         }
