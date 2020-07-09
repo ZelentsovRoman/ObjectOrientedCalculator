@@ -74,6 +74,15 @@ namespace ObjectOrientedCalculator
             zn = true;
         }
 
+        private void button20_Click(object sender, EventArgs e)
+        {
+            a = float.Parse(textBox1.Text);
+            textBox1.Clear();
+            count = 6;
+            label1.Text = "exp^" + a.ToString();
+            zn = true;
+        }
+        
         private void button9_Click(object sender, EventArgs e)
         {
             textBox1.Text = textBox1.Text + 4;
