@@ -17,7 +17,7 @@ namespace ObjectOrientedCalculator
             InitializeComponent();
         }
         RichTextBox openRichTextBox = new RichTextBox();
-        float a, b;
+        double a, b;
         bool zn = true;
         int count;
         private void button2_Click(object sender, EventArgs e)
@@ -49,7 +49,7 @@ namespace ObjectOrientedCalculator
             calculate();
             label1.Text = "";
         }
-
+        
         private void button12_Click(object sender, EventArgs e)
         {
             textBox1.Text = textBox1.Text + 7;
@@ -97,6 +97,14 @@ namespace ObjectOrientedCalculator
             label1.Text = a.ToString() + "-";
             zn = true;
         }
+        
+        private void button21_Click(object sender, EventArgs e)
+{
+            a = Convert.ToDouble(textBox1.Text);
+            textBox1.Clear();
+            count = 6;
+            label1.Text = a.ToString();
+}
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -178,6 +186,10 @@ namespace ObjectOrientedCalculator
                     break;
                 case 5:
                     b = a / float.Parse(textBox1.Text);
+                    textBox1.Text = b.ToString();
+                    break;
+                case 6:
+                    b = Math.Exp(a);
                     textBox1.Text = b.ToString();
                     break;
             }
