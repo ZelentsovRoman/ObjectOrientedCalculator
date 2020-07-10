@@ -1,4 +1,5 @@
 ﻿using System;
+using NUnit.Framework;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Collections.Specialized;
 
 namespace ObjectOrientedCalculator
 {
@@ -17,9 +19,9 @@ namespace ObjectOrientedCalculator
             InitializeComponent();
         }
         RichTextBox openRichTextBox = new RichTextBox();
-        double a, b;
+        public static double a, b;
         bool zn = true;
-        int count;
+        public static int count;
         private void button2_Click(object sender, EventArgs e)
         {
             textBox1.Text = textBox1.Text + 0;
@@ -162,6 +164,7 @@ namespace ObjectOrientedCalculator
             textBox1.Clear();
             count = 6;
             label1.Text = a.ToString();
+
         }
 
         private void calculate()
@@ -195,6 +198,44 @@ namespace ObjectOrientedCalculator
                     break;
             }
 
+        }
+        [TestFixture]
+        public class ObjectOrientedCalculatorTests
+        {
+            [Test]
+            public void button17_ClickTest()
+            {
+                double m;
+                if (count == 1) {
+                    m = 9;
+                    Assert.AreEqual(m, b);
+                }
+                else if (count == 2)
+                {
+                    m = 3;
+                    Assert.AreEqual(m, b);
+                }
+                else if (count == 3)
+                {
+                    m = 1;
+                    Assert.AreEqual(m, b);
+                }
+                else if (count == 4)
+                {
+                    m = 2;
+                    Assert.AreEqual(m, b);
+                }
+                else if (count == 5)
+                {
+                    m = 2;
+                    Assert.AreEqual(m, b);
+                }
+                else if (count == 6)
+                {
+                    m = 2.718281828459;
+                    Assert.AreEqual(m, b);
+                }
+            }
         }
     }
 }
