@@ -60,6 +60,8 @@ namespace ObjectOrientedCalculator
             double res = calculator.Calculate(a, b);
             textBox1.Text = res.ToString();
         }
+        
+        //ограничение ввода символов с клавиатуры
         private void TextBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
 
