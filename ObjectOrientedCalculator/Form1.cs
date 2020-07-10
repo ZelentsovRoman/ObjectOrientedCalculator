@@ -59,7 +59,6 @@ namespace ObjectOrientedCalculator
             ITwoArgCalculator calculator = TwoArgFactory.CreateObjectOrientedCalculator(Operation);
             double res = calculator.Calculate(a, b);
             textBox1.Text = res.ToString();
-            label1.Text = "";
         }
         private void TextBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
