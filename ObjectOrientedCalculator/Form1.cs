@@ -38,6 +38,8 @@ namespace ObjectOrientedCalculator
         {
             textBox1.Text = textBox1.Text + ",";
         }
+
+        //выбор операции
         private void operChoose(object sender, EventArgs e)
         {
             a = float.Parse(textBox1.Text);
@@ -45,6 +47,8 @@ namespace ObjectOrientedCalculator
             Operation = ((Button)sender).Name;
             
         }
+
+        //выбор функции
         private void funcChoose(object sender, EventArgs e)
         {
             a = float.Parse(textBox1.Text);
@@ -53,12 +57,23 @@ namespace ObjectOrientedCalculator
             b = calculator.Calculate(a);
             textBox1.Text = b.ToString();
         }
+
+        
         private void button15_Click(object sender, EventArgs e)
         {
             b = Convert.ToDouble(textBox1.Text);
-            ITwoArgCalculator calculator = TwoArgFactory.CreateObjectOrientedCalculator(Operation);
-            double res = calculator.Calculate(a, b);
-            textBox1.Text = res.ToString();
+            //проверка деления на ноль
+            if (Operation == ("Div") && b == 0)
+            {
+                    MessageBox.Show("Деление на ноль невозможно");
+                    textBox1.Clear();
+            }
+            else
+            {
+                ITwoArgCalculator calculator = TwoArgFactory.CreateObjectOrientedCalculator(Operation);
+                double res = calculator.Calculate(a, b);
+                textBox1.Text = res.ToString();
+            }
         }
         
         //ограничение ввода символов с клавиатуры
