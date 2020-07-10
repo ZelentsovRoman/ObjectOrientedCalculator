@@ -199,14 +199,18 @@ namespace ObjectOrientedCalculator
             }
 
         }
+
         [TestFixture]
+
+        //Модульное тестирование
         public class ObjectOrientedCalculatorTests
         {
             [Test]
             public void button17_ClickTest()
             {
                 double m;
-                if (count == 1) {
+                if (count == 1)
+                {
                     m = 9;
                     Assert.AreEqual(m, b);
                 }
@@ -236,6 +240,31 @@ namespace ObjectOrientedCalculator
                     Assert.AreEqual(m, b);
                 }
             }
+
+            //Продвинутое тестирование
+            [TestCase(0, 0, 0)]
+            [TestCase(3, 4, 7)]
+            [TestCase(-7, -2, -9)]
+            public void CalculateTest(double firstValue, double secondValue, double expected)
+            {
+                var calculator = new AdditionCalculator();
+                var actualResult = calculator.Calculate(firstValue, secondValue);
+                Assert.AreEqual(expected, actualResult);
+            }
+
+            //Тестирование фабрик
+            [TestCase("Calculator", typeof(Form1))]
+            public void CalculateTest(string name, Type type)
+            {
+                var calculator = TwoArgumentsFactory.CreateCalculator(name);
+                Assert.IsInstanceOf(type, calculator);
+            }
         }
     }
 }
+//            Assert.Throws<Exception>(() => ВызовФункцииВыбрасывающейИсключение);
+//try {
+//           if((count == 4 || count == 5) && ( a == 0))
+//              throw new Exception("Деление на 0");
+//       }
+//    catch(Exception exc) {}
