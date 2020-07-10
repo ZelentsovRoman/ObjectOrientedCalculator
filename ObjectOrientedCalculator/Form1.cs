@@ -1,14 +1,7 @@
 ﻿using System;
-using NUnit.Framework;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Collections.Specialized;
+using ObjectOrientedCalculator.Operations;
+
 
 namespace ObjectOrientedCalculator
 {
@@ -19,9 +12,9 @@ namespace ObjectOrientedCalculator
             InitializeComponent();
         }
         RichTextBox openRichTextBox = new RichTextBox();
-        public static double a, b;
+        double a, b;
         bool zn = true;
-        public static int count;
+        string Operation;
         private void button2_Click(object sender, EventArgs e)
         {
             textBox1.Text = textBox1.Text + 0;
@@ -45,13 +38,36 @@ namespace ObjectOrientedCalculator
         {
             textBox1.Text = textBox1.Text + ",";
         }
-
+        private void operChoose(object sender, EventArgs e)
+        {
+            a = float.Parse(textBox1.Text);
+            textBox1.Clear();
+            Operation = ((Button)sender).Name;
+            
+        }
+        private void funcChoose(object sender, EventArgs e)
+        {
+            a = float.Parse(textBox1.Text);
+            Operation = ((Button)sender).Name;
+            IOneArgCalculator calculator = OneArgFactory.CreateObjectOrientedCalculator(Operation);
+            b = calculator.Calculate(a);
+            textBox1.Text = b.ToString();
+        }
         private void button15_Click(object sender, EventArgs e)
         {
-            calculate();
+            b = Convert.ToDouble(textBox1.Text);
+            ITwoArgCalculator calculator = TwoArgFactory.CreateObjectOrientedCalculator(Operation);
+            double res = calculator.Calculate(a, b);
+            textBox1.Text = res.ToString();
             label1.Text = "";
         }
+        private void TextBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
 
+            if (Char.IsDigit(e.KeyChar)) return;
+            else
+                e.Handled = true;
+        }
         private void button12_Click(object sender, EventArgs e)
         {
             textBox1.Text = textBox1.Text + 7;
@@ -65,15 +81,6 @@ namespace ObjectOrientedCalculator
         private void button8_Click(object sender, EventArgs e)
         {
             textBox1.Text = textBox1.Text + 9;
-        }
-
-        private void button19_Click(object sender, EventArgs e)
-        {
-            a = float.Parse(textBox1.Text);
-            textBox1.Clear();
-            count = 2;
-            label1.Text = a.ToString() + "+";
-            zn = true;
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -91,15 +98,6 @@ namespace ObjectOrientedCalculator
             textBox1.Text = textBox1.Text + 6;
         }
 
-        private void button18_Click(object sender, EventArgs e)
-        {
-            a = float.Parse(textBox1.Text);
-            textBox1.Clear();
-            count = 3;
-            label1.Text = a.ToString() + "-";
-            zn = true;
-        }
-
         private void button3_Click(object sender, EventArgs e)
         {
             textBox1.Text = textBox1.Text + 1;
@@ -115,24 +113,6 @@ namespace ObjectOrientedCalculator
             textBox1.Text = textBox1.Text + 3;
         }
 
-        private void button17_Click(object sender, EventArgs e)
-        {
-            a = float.Parse(textBox1.Text);
-            textBox1.Clear();
-            count = 4;
-            label1.Text = a.ToString() + "*";
-            zn = true;
-        }
-
-        private void button13_Click(object sender, EventArgs e)
-        {
-            a = float.Parse(textBox1.Text);
-            textBox1.Clear();
-            count = 5;
-            label1.Text = a.ToString() + "/";
-            zn = true;
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             int lenght = textBox1.Text.Length - 1;
@@ -144,127 +124,10 @@ namespace ObjectOrientedCalculator
             }
         }
 
-        private void button14_Click(object sender, EventArgs e)
-        {
-            a = float.Parse(textBox1.Text);
-            textBox1.Clear();
-            count = 1;
-            label1.Text = a.ToString();
-        }
-
         private void button4_Click(object sender, EventArgs e)
         {
             textBox1.Text = "";
             label1.Text = "";
         }
-
-        private void button21_Click(object sender, EventArgs e)
-        {
-            a = Convert.ToDouble(textBox1.Text);
-            textBox1.Clear();
-            count = 6;
-            label1.Text = a.ToString();
-
-        }
-
-        private void calculate()
-        {
-            switch (count)
-            {
-
-                case 1:
-                    b = Math.Max(a, float.Parse(textBox1.Text));
-                    textBox1.Text = b.ToString();
-                    break;
-                case 2:
-                    b = a + float.Parse(textBox1.Text);
-                    textBox1.Text = b.ToString();
-                    break;
-                case 3:
-                    b = a - float.Parse(textBox1.Text);
-                    textBox1.Text = b.ToString();
-                    break;
-                case 4:
-                    b = a * float.Parse(textBox1.Text);
-                    textBox1.Text = b.ToString();
-                    break;
-                case 5:
-                    b = a / float.Parse(textBox1.Text);
-                    textBox1.Text = b.ToString();
-                    break;
-                case 6:
-                    b = Math.Exp(a);
-                    textBox1.Text = b.ToString();
-                    break;
-            }
-
-        }
-
-        [TestFixture]
-
-        //Модульное тестирование
-        public class ObjectOrientedCalculatorTests
-        {
-            [Test]
-            public void button17_ClickTest()
-            {
-                double m;
-                if (count == 1)
-                {
-                    m = 9;
-                    Assert.AreEqual(m, b);
-                }
-                else if (count == 2)
-                {
-                    m = 3;
-                    Assert.AreEqual(m, b);
-                }
-                else if (count == 3)
-                {
-                    m = 1;
-                    Assert.AreEqual(m, b);
-                }
-                else if (count == 4)
-                {
-                    m = 2;
-                    Assert.AreEqual(m, b);
-                }
-                else if (count == 5)
-                {
-                    m = 2;
-                    Assert.AreEqual(m, b);
-                }
-                else if (count == 6)
-                {
-                    m = 2.718281828459;
-                    Assert.AreEqual(m, b);
-                }
-            }
-
-            //Продвинутое тестирование
-            [TestCase(0, 0, 0)]
-            [TestCase(3, 4, 7)]
-            [TestCase(-7, -2, -9)]
-            public void CalculateTest(double firstValue, double secondValue, double expected)
-            {
-                var calculator = new AdditionCalculator();
-                var actualResult = calculator.Calculate(firstValue, secondValue);
-                Assert.AreEqual(expected, actualResult);
-            }
-
-            //Тестирование фабрик
-            [TestCase("Calculator", typeof(Form1))]
-            public void CalculateTest(string name, Type type)
-            {
-                var calculator = TwoArgumentsFactory.CreateCalculator(name);
-                Assert.IsInstanceOf(type, calculator);
-            }
-        }
     }
 }
-//            Assert.Throws<Exception>(() => ВызовФункцииВыбрасывающейИсключение);
-//try {
-//           if((count == 4 || count == 5) && ( a == 0))
-//              throw new Exception("Деление на 0");
-//       }
-//    catch(Exception exc) {}

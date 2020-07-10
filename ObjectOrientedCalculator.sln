@@ -5,11 +5,6 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectOrientedCalculator", "ObjectOrientedCalculator\ObjectOrientedCalculator.csproj", "{B333E8FA-D812-4A90-8B88-6CDF3A7D9939}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4B632D8F-6127-43E7-9C28-1976348ADFA7}"
-	ProjectSection(SolutionItems) = preProject
-		packages\NUnit.3.12.0\build\NUnit.props = packages\NUnit.3.12.0\build\NUnit.props
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
