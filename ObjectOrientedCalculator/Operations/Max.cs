@@ -6,7 +6,7 @@ namespace ObjectOrientedCalculator.Operations
     {
         public double Calculate(double a, double b)
         {
-            return (Math.Max(a,b));
+            return (Math.Max(a, b));
         }
     }
 }

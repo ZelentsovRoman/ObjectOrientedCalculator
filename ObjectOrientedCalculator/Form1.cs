@@ -1,6 +1,6 @@
-﻿using System;
+﻿using ObjectOrientedCalculator.Operations;
+using System;
 using System.Windows.Forms;
-using ObjectOrientedCalculator.Operations;
 
 
 namespace ObjectOrientedCalculator
@@ -45,7 +45,7 @@ namespace ObjectOrientedCalculator
             a = float.Parse(textBox1.Text);
             textBox1.Clear();
             Operation = ((Button)sender).Name;
-            
+
         }
 
         //выбор функции
@@ -58,15 +58,15 @@ namespace ObjectOrientedCalculator
             textBox1.Text = b.ToString();
         }
 
-        
+
         private void button15_Click(object sender, EventArgs e)
         {
             b = Convert.ToDouble(textBox1.Text);
             //проверка деления на ноль
             if (Operation == ("Div") && b == 0)
             {
-                    MessageBox.Show("Деление на ноль невозможно");
-                    textBox1.Clear();
+                MessageBox.Show("Деление на ноль невозможно");
+                textBox1.Clear();
             }
             else
             {
@@ -75,7 +75,7 @@ namespace ObjectOrientedCalculator
                 textBox1.Text = res.ToString();
             }
         }
-        
+
         //ограничение ввода символов с клавиатуры
         private void TextBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
