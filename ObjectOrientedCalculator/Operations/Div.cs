@@ -6,7 +6,19 @@ namespace ObjectOrientedCalculator.Operations
     {
         public double Calculate(double a, double b)
         {
-           return (a/b);
+            try
+            {
+                if (b == 0)
+                    throw new Exception("DivideByZeroException");
+                return (a / b);
+
+            }
+            catch (Exception)
+            {
+
+                return (Double.NaN);
+
+            }
         }
     }
 }
